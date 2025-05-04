@@ -1,6 +1,12 @@
 package jp.takejohn.iomctokyostoragekit.client.item
 
+import kotlinx.serialization.Serializable
 import net.minecraft.util.math.Vec3d
 
-class ItemRecord(val name: String, val locate: Vec3d, val group: String) {
-}
+@Serializable
+data class ItemRecord(
+    val name: String,
+    @Serializable(Vec3dSerializer::class)
+    val locate: Vec3d,
+    val group: String
+)
