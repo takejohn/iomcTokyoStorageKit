@@ -39,7 +39,7 @@ class ItemListWidget(
 
         private val nameText = TextWidget(Text.literal(data.name), textRenderer)
 
-        private val locateText = TextWidget(Text.literal(data.locate), textRenderer)
+        private val locateText = TextWidget(Text.literal(data.locate.toString()), textRenderer)
 
         private val groupText = TextWidget(Text.literal("ジャンル: " + data.group), textRenderer)
 

@@ -1,15 +1,21 @@
 package jp.takejohn.iomctokyostoragekit.client.item
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import net.minecraft.util.math.Vec3d
 import java.lang.reflect.Type
 
 class ItemTable(private val inner: Map<String, ItemRecord>) : Map<String, ItemRecord> by inner {
     object Deserializer : JsonDeserializer<ItemTable> {
-        private val gson by lazy { Gson() }
+        private val gson: Gson by lazy {
+            GsonBuilder()
+                .registerTypeAdapter(Vec3d::class.java, Vec3dDeserializer)
+                .create()
+        }
 
         override fun deserialize(
             json: JsonElement,

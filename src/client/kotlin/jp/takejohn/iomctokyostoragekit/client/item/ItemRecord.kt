@@ -1,4 +1,6 @@
 package jp.takejohn.iomctokyostoragekit.client.item
 
-class ItemRecord(val name: String, val locate: String, val group: String) {
+import net.minecraft.util.math.Vec3d
+
+class ItemRecord(val name: String, val locate: Vec3d, val group: String) {
 }
