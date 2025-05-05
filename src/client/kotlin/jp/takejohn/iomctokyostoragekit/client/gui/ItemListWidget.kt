@@ -41,7 +41,7 @@ class ItemListWidget(
 
         private val locateText = TextWidget(Text.literal(data.locate.toString()), textRenderer)
 
-        private val groupText = TextWidget(Text.literal("ジャンル: " + data.group), textRenderer)
+        private val groupText = TextWidget(Text.translatable("gui.iomctokyostoragekit.category", data.group), textRenderer)
 
         init {
             children.add(nameText)

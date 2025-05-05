@@ -1,0 +1,7 @@
+{
+  "category.iomctokyostoragekit.key_bindings": "iomcTokyoStorageKit",
+  "gui.iomctokyostoragekit.item_search": "iomc Tokyo Storage Item Search",
+  "gui.iomctokyostoragekit.search": "Search",
+  "gui.iomctokyostoragekit.category": "Category: %1$s",
+  "key.iomctokyostoragekit.open_search_screen": "Open Search Screen"
+}

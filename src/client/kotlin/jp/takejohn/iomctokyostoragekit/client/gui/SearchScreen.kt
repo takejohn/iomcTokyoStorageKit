@@ -15,7 +15,7 @@ private const val PADDING = 5
 private const val BASE_HEIGHT = 20
 private const val BUTTON_WIDTH = 50
 
-class SearchScreen(val parent: Screen?) : Screen(Text.literal("iomc東京倉庫 アイテム検索")){
+class SearchScreen(val parent: Screen?) : Screen(Text.translatable("gui.iomctokyostoragekit.item_search")){
     var titleText: TextWidget? = null
 
     var queryTextField: TextFieldWidget? = null
@@ -66,7 +66,10 @@ class SearchScreen(val parent: Screen?) : Screen(Text.literal("iomc東京倉庫 
     }
 
     private fun createSearchButton(): ButtonWidget {
-        val widget = ButtonWidget.builder(Text.literal("検索"), this::search)
+        val widget = ButtonWidget.builder(
+            Text.translatable("gui.iomctokyostoragekit.search"),
+            this::search
+        )
             .dimensions(
                 width - (BUTTON_WIDTH + MARGIN),
                 MARGIN + BASE_HEIGHT + PADDING,
