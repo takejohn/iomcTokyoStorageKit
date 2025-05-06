@@ -20,6 +20,10 @@ class ItemListWidget(
     message: Text,
     val textRenderer: TextRenderer,
 ) : ScrollableWidget(x, y, width, height, message) {
+    inner class TooltipWithMousePosition(val tooltip: List<Text>, val mouseX: Int, val mouseY: Int)
+
+    var hoveredTooltip: TooltipWithMousePosition? = null
+
     private val columns = (width - MARGIN * 2) / ITEM_SIZE
 
     // itemLocationList.size() を column で割った値の切り上げ
@@ -51,7 +55,7 @@ class ItemListWidget(
                     itemLocation.category
                 )
                 val tooltip = listOf(itemStack.name, locationText, categoryText)
-                context.drawTooltip(textRenderer, tooltip, mouseX, mouseY)
+                hoveredTooltip = TooltipWithMousePosition(tooltip, mouseX, mouseY)
             }
         }
     }

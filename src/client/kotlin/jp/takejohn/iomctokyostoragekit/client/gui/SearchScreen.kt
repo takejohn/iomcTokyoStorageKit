@@ -3,6 +3,7 @@ package jp.takejohn.iomctokyostoragekit.client.gui
 import jp.takejohn.iomctokyostoragekit.client.item.ItemLocationList
 import jp.takejohn.iomctokyostoragekit.client.item.ItemLocationListLoader
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.client.gui.widget.TextFieldWidget
@@ -32,6 +33,14 @@ class SearchScreen(val parent: Screen?) : Screen(Text.translatable("gui.iomctoky
         addDrawableChild(createSearchButton())
         itemLocationList.get()?.let {
             addDrawableChild(createItemList(it))
+        }
+    }
+
+    override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
+        super.render(context, mouseX, mouseY, delta)
+
+        itemList?.hoveredTooltip?.let {
+            context.drawTooltip(textRenderer, it.tooltip, it.mouseX, it.mouseY)
         }
     }
 
