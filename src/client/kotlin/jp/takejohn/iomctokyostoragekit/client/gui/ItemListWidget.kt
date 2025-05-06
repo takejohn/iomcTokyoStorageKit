@@ -1,7 +1,6 @@
 package jp.takejohn.iomctokyostoragekit.client.gui
 
 import jp.takejohn.iomctokyostoragekit.client.item.ItemLocationList
-import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.widget.ScrollableWidget
@@ -18,7 +17,6 @@ class ItemListWidget(
     width: Int,
     height: Int,
     message: Text,
-    val textRenderer: TextRenderer,
 ) : ScrollableWidget(x, y, width, height, message) {
     inner class TooltipWithMousePosition(val tooltip: List<Text>, val mouseX: Int, val mouseY: Int)
 

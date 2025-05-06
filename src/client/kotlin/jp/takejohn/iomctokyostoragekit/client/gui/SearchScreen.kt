@@ -76,9 +76,8 @@ class SearchScreen(val parent: Screen?) : Screen(Text.translatable("gui.iomctoky
 
     private fun createSearchButton(): ButtonWidget {
         val widget = ButtonWidget.builder(
-            Text.translatable("gui.iomctokyostoragekit.search"),
-            this::search
-        )
+            Text.translatable("gui.iomctokyostoragekit.search")
+        ) { button -> search() }
             .dimensions(
                 width - (BUTTON_WIDTH + MARGIN),
                 MARGIN + BASE_HEIGHT + PADDING,
@@ -90,7 +89,7 @@ class SearchScreen(val parent: Screen?) : Screen(Text.translatable("gui.iomctoky
         return widget
     }
 
-    private fun search(button: ButtonWidget) {
+    private fun search() {
         ItemLocationListLoader.loadItems().thenAccept { itemLocationList ->
             this.itemLocationList.set(itemLocationList)
             queryTextField?.let {
@@ -109,7 +108,6 @@ class SearchScreen(val parent: Screen?) : Screen(Text.translatable("gui.iomctoky
             width - MARGIN * 2,
             height - (MARGIN + BASE_HEIGHT + PADDING + BASE_HEIGHT + PADDING) - MARGIN,
             Text.empty(),
-            textRenderer,
         )
         itemList = widget
         return widget
