@@ -1,4 +1,4 @@
-package jp.takejohn.iomctokyostoragekit.client.item
+package jp.takejohn.iomctokyostoragekit.client.serialize
 
 import kotlinx.serialization.Serializable
 import net.minecraft.util.math.Vec3d

@@ -1,7 +1,7 @@
 package jp.takejohn.iomctokyostoragekit.client.gui
 
-import jp.takejohn.iomctokyostoragekit.client.item.ItemTable
-import jp.takejohn.iomctokyostoragekit.client.item.ItemTableLoader
+import jp.takejohn.iomctokyostoragekit.client.item.ItemLocationList
+import jp.takejohn.iomctokyostoragekit.client.item.ItemLocationListLoader
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.widget.ButtonWidget
@@ -22,7 +22,7 @@ class SearchScreen(val parent: Screen?) : Screen(Text.translatable("gui.iomctoky
 
     var searchButton: ButtonWidget? = null
 
-    val itemTable = AtomicReference<ItemTable?>()
+    val itemLocationList = AtomicReference<ItemLocationList?>()
 
     var itemList: ItemListWidget? = null
 
@@ -30,7 +30,7 @@ class SearchScreen(val parent: Screen?) : Screen(Text.translatable("gui.iomctoky
         addDrawableChild(createTitleText())
         addDrawableChild(createQueryTextField())
         addDrawableChild(createSearchButton())
-        itemTable.get()?.let {
+        itemLocationList.get()?.let {
             addDrawableChild(createItemList(it))
         }
     }
@@ -82,19 +82,19 @@ class SearchScreen(val parent: Screen?) : Screen(Text.translatable("gui.iomctoky
     }
 
     private fun search(button: ButtonWidget) {
-        ItemTableLoader.loadItems().thenAccept { itemTable ->
-            this.itemTable.set(itemTable)
+        ItemLocationListLoader.loadItems().thenAccept { itemLocationList ->
+            this.itemLocationList.set(itemLocationList)
             queryTextField?.let {
-                val matchedItems = itemTable.searchItems(it.text)
+                val matchedItems = itemLocationList.searchItems(it.text)
                 remove(itemList)
                 addDrawableChild(createItemList(matchedItems))
             }
         }
     }
 
-    private fun createItemList(itemTable: ItemTable): ItemListWidget {
+    private fun createItemList(itemLocationList: ItemLocationList): ItemListWidget {
         val widget = ItemListWidget(
-            itemTable,
+            itemLocationList,
             client ?: MinecraftClient.getInstance(),
             width,
             height - (MARGIN + BASE_HEIGHT + PADDING + BASE_HEIGHT + PADDING) - MARGIN,

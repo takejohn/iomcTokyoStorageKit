@@ -1,4 +1,4 @@
-package jp.takejohn.iomctokyostoragekit.client.item
+package jp.takejohn.iomctokyostoragekit.client.serialize
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -7,11 +7,12 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import net.minecraft.util.Identifier
 
 @Serializable(ItemTable.Serializer::class)
-data class ItemTable(private val inner: Map<String, ItemRecord>) : Map<String, ItemRecord> by inner {
+data class ItemTable(private val inner: Map<Identifier, ItemRecord>) : Map<Identifier, ItemRecord> by inner {
     object Serializer : KSerializer<ItemTable> {
-        private val delegateSerializer = MapSerializer(String.serializer(), ItemRecord.serializer())
+        private val delegateSerializer = MapSerializer(IdentifierSerializer, ItemRecord.serializer())
 
         // serialName は一意である必要があるため、このModのパッケージ名を含めておく
         override val descriptor: SerialDescriptor = SerialDescriptor(
@@ -24,19 +25,5 @@ data class ItemTable(private val inner: Map<String, ItemRecord>) : Map<String, I
 
         override fun deserialize(decoder: Decoder): ItemTable =
             ItemTable(decoder.decodeSerializableValue(delegateSerializer))
-    }
-
-    fun searchItems(query: String): ItemTable {
-        val trimmedQuery = query.trim()
-        if (trimmedQuery.isEmpty()) {
-            return this
-        }
-
-        val matchedItems = this.filter { (key, value) ->
-            key.contains(trimmedQuery, true) ||
-                    value.name.contains(trimmedQuery, true) ||
-                    value.group.contains(trimmedQuery, true)
-        }
-        return ItemTable(matchedItems)
     }
 }
