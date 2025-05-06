@@ -95,10 +95,12 @@ class SearchScreen(val parent: Screen?) : Screen(Text.translatable("gui.iomctoky
     private fun createItemList(itemLocationList: ItemLocationList): ItemListWidget {
         val widget = ItemListWidget(
             itemLocationList,
-            client ?: MinecraftClient.getInstance(),
-            width,
-            height - (MARGIN + BASE_HEIGHT + PADDING + BASE_HEIGHT + PADDING) - MARGIN,
+            MARGIN,
             MARGIN + BASE_HEIGHT + PADDING + BASE_HEIGHT + PADDING,
+            width - MARGIN * 2,
+            height - (MARGIN + BASE_HEIGHT + PADDING + BASE_HEIGHT + PADDING) - MARGIN,
+            Text.empty(),
+            textRenderer,
         )
         itemList = widget
         return widget

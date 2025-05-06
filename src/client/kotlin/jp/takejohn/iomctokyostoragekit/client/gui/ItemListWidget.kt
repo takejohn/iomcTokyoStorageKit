@@ -1,95 +1,63 @@
 package jp.takejohn.iomctokyostoragekit.client.gui
 
-import jp.takejohn.iomctokyostoragekit.client.item.ItemLocation
 import jp.takejohn.iomctokyostoragekit.client.item.ItemLocationList
-import jp.takejohn.iomctokyostoragekit.client.serialize.ItemRecord
-import jp.takejohn.iomctokyostoragekit.client.serialize.ItemTable
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.DrawContext
-import net.minecraft.client.gui.Element
-import net.minecraft.client.gui.Selectable
-import net.minecraft.client.gui.widget.ClickableWidget
-import net.minecraft.client.gui.widget.ElementListWidget
-import net.minecraft.client.gui.widget.TextWidget
+import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
+import net.minecraft.client.gui.widget.ScrollableWidget
+import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
-import net.minecraft.util.Identifier
 
-private const val BASE_HEIGHT = 16
-
-private const val PADDING = 0
+private const val MARGIN = 5
+private const val ITEM_SIZE = 18
 
 class ItemListWidget(
-    itemLocationList: ItemLocationList,
-    minecraftClient: MinecraftClient,
+    private val itemLocationList: ItemLocationList,
+    x: Int,
+    y: Int,
     width: Int,
     height: Int,
-    y: Int,
-) : ElementListWidget<ItemListWidget.Entry>(
-    minecraftClient,
-    width,
-    height,
-    y,
-    BASE_HEIGHT * 3 + PADDING * 2
-) {
-    class Entry(
-        val itemLocation: ItemLocation,
-        val width: Int,
-        val textRenderer: TextRenderer
-    ) : ElementListWidget.Entry<Entry>() {
-        private val children = mutableListOf<ClickableWidget>()
+    message: Text,
+    val textRenderer: TextRenderer,
+) : ScrollableWidget(x, y, width, height, message) {
+    private val columns = (width - MARGIN * 2) / ITEM_SIZE
 
-        private val nameText = TextWidget(itemLocation.item.name, textRenderer)
+    // itemLocationList.size() を column で割った値の切り上げ
+    override fun getContentsHeight(): Int = (itemLocationList.size() + columns - 1) / columns
 
-        private val locateText = TextWidget(Text.literal(itemLocation.locate.toString()), textRenderer)
+    override fun getDeltaYPerScroll(): Double = ITEM_SIZE.toDouble()
 
-        private val groupText = TextWidget(
-            Text.translatable("gui.iomctokyostoragekit.category", itemLocation.category),
-            textRenderer
-        )
+    override fun renderContents(
+        context: DrawContext,
+        mouseX: Int,
+        mouseY: Int,
+        delta: Float
+    ) {
+        val startX = x + (width - columns * ITEM_SIZE) / 2
+        val startY = y + MARGIN
+        for ((i, itemLocation) in itemLocationList.withIndex()) {
+            val column = i % columns
+            val row = i / columns
+            val itemX = startX + column * ITEM_SIZE
+            val itemY = startY + row * ITEM_SIZE
+            val itemStack = ItemStack(itemLocation.item)
+            context.drawItem(itemStack, itemX, itemY)
 
-        init {
-            children.add(nameText)
-        }
-
-        override fun children(): List<Element> = children
-
-        override fun selectableChildren(): List<Selectable> = children
-
-        override fun render(
-            context: DrawContext?,
-            index: Int,
-            y: Int,
-            x: Int,
-            entryWidth: Int,
-            entryHeight: Int,
-            mouseX: Int,
-            mouseY: Int,
-            hovered: Boolean,
-            tickDelta: Float
-        ) {
-            nameText.x = x
-            nameText.y = y
-            nameText.render(context, mouseX, mouseY, tickDelta)
-
-            locateText.x = x
-            locateText.y = y + BASE_HEIGHT + PADDING
-            locateText.render(context, mouseX, mouseY, tickDelta)
-
-            groupText.x = x
-            groupText.y = y + (BASE_HEIGHT + PADDING) * 2
-            groupText.render(context, mouseX, mouseY, tickDelta)
+            // ホバーしている場合、ツールチップを描画
+            if (mouseX in itemX until (itemX + 16) && mouseY in itemY until (itemY + 16)) {
+                val locationText = Text.literal(itemLocation.locate.toString())
+                val categoryText = Text.translatable(
+                    "gui.iomctokyostoragekit.category",
+                    itemLocation.category
+                )
+                val tooltip = listOf(itemStack.name, locationText, categoryText)
+                context.drawTooltip(textRenderer, tooltip, mouseX, mouseY)
+            }
         }
     }
 
-    init {
-        for (itemLocation in itemLocationList) {
-            createEntry(itemLocation)
-        }
-    }
-
-    private fun createEntry(itemLocation: ItemLocation) {
-        val entry = Entry(itemLocation, width, client.textRenderer)
-        addEntry(entry)
+    override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {
+        // TODOかも
     }
 }
