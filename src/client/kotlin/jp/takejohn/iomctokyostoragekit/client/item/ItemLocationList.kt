@@ -26,4 +26,8 @@ class ItemLocationList(private val inner: List<ItemLocation>): Iterable<ItemLoca
     fun size(): Int {
         return inner.size
     }
+
+    operator fun get(index: Int): ItemLocation {
+        return inner[index]
+    }
 }
