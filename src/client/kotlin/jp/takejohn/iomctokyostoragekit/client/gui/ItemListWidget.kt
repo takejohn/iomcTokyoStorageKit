@@ -1,7 +1,6 @@
 package jp.takejohn.iomctokyostoragekit.client.gui
 
 import jp.takejohn.iomctokyostoragekit.client.item.ItemLocationList
-import net.minecraft.client.MinecraftClient
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
@@ -55,6 +54,10 @@ class ItemListWidget(
                 context.drawTooltip(textRenderer, tooltip, mouseX, mouseY)
             }
         }
+    }
+
+    override fun drawBox(context: DrawContext?, x: Int, y: Int, width: Int, height: Int) {
+        // 背景を透明にするため、何もしない
     }
 
     override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {
