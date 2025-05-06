@@ -5,6 +5,7 @@ import jp.takejohn.iomctokyostoragekit.client.highlight.HighlightMarkerClient
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents
 import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
 import org.lwjgl.glfw.GLFW
@@ -34,6 +35,10 @@ class IomcTokyoStorageKitClient : ClientModInitializer {
         // 1ティック経過するごとにハイライトの継続時間を減少
         ClientTickEvents.END_CLIENT_TICK.register {
             HighlightMarkerClient.tick()
+        }
+
+        WorldRenderEvents.LAST.register { context ->
+            HighlightMarkerClient.renderWorld(context)
         }
     }
 }
