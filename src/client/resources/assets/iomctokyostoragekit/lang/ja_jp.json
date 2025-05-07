@@ -1,5 +1,8 @@
 {
   "category.iomctokyostoragekit.key_bindings": "iomcTokyoStorageKit",
+  "debug.iomctokyostoragekit.logging.save_failed": "[iomcTokyoStorageKit] コンテナの記録の保存に失敗しました",
+  "debug.iomctokyostoragekit.logging.start": "[iomcTokyoStorageKit] コンテナの記録を開始しました",
+  "debug.iomctokyostoragekit.logging.stop": "[iomcTokyoStorageKit] コンテナの記録を停止しました",
   "gui.iomctokyostoragekit.item_search": "iomc東京倉庫 アイテム検索",
   "gui.iomctokyostoragekit.search": "検索",
   "gui.iomctokyostoragekit.category": "ジャンル: %1$s",

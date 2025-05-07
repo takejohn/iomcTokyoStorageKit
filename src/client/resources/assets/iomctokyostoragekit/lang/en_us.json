@@ -1,5 +1,8 @@
 {
   "category.iomctokyostoragekit.key_bindings": "iomcTokyoStorageKit",
+  "debug.iomctokyostoragekit.logging.save_failed": "[iomcTokyoStorageKit] Container logging failed to save",
+  "debug.iomctokyostoragekit.logging.start": "[iomcTokyoStorageKit] Container logging started",
+  "debug.iomctokyostoragekit.logging.stop": "[iomcTokyoStorageKit] Container logging stopped",
   "gui.iomctokyostoragekit.item_search": "iomc Tokyo Storage Item Search",
   "gui.iomctokyostoragekit.search": "Search",
   "gui.iomctokyostoragekit.category": "Category: %1$s",
