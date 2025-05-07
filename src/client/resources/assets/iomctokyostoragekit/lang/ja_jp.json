@@ -6,5 +6,6 @@
   "gui.iomctokyostoragekit.item_search": "iomc東京倉庫 アイテム検索",
   "gui.iomctokyostoragekit.search": "検索",
   "gui.iomctokyostoragekit.category": "ジャンル: %1$s",
-  "key.iomctokyostoragekit.open_search_screen": "検索画面を開く"
+  "key.iomctokyostoragekit.open_search_screen": "検索画面を開く",
+  "key.iomctokyostoragekit.toggle_logging": "コンテナの記録を切り替え"
 }
