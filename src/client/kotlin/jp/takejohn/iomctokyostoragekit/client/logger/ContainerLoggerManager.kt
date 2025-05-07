@@ -40,7 +40,8 @@ object ContainerLoggerManager {
     private fun start() {
         logger = ContainerLogger()
         MinecraftClient.getInstance().player?.sendMessage(
-            Text.translatable("debug.iomctokyostoragekit.logging.start")
+            Text.translatable("debug.iomctokyostoragekit.logging.start"),
+            false,
         )
     }
 
@@ -53,7 +54,8 @@ object ContainerLoggerManager {
         }, this::onSerializationError)
         this.logger = null
         MinecraftClient.getInstance().player?.sendMessage(
-            Text.translatable("debug.iomctokyostoragekit.logging.stop")
+            Text.translatable("debug.iomctokyostoragekit.logging.stop"),
+            false,
         )
     }
 
@@ -81,7 +83,8 @@ object ContainerLoggerManager {
         client.execute {
             client.player?.sendMessage(
                 Text.translatable("debug.iomctokyostoragekit.logging.save_failed")
-                    .setStyle(Style.EMPTY.withColor(Formatting.RED))
+                    .setStyle(Style.EMPTY.withColor(Formatting.RED)),
+                false,
             )
         }
     }

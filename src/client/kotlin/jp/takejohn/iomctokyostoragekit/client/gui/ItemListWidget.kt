@@ -31,11 +31,11 @@ class ItemListWidget(
     val startY = y + MARGIN
 
     // itemLocationList.size() を column で割った値の切り上げ
-    override fun getContentsHeight(): Int = (itemLocationList.size() + columns - 1) / columns
+    override fun getContentsHeightWithPadding(): Int = (itemLocationList.size() + columns - 1) / columns
 
     override fun getDeltaYPerScroll(): Double = ITEM_SIZE.toDouble()
 
-    override fun renderContents(
+    override fun renderWidget(
         context: DrawContext,
         mouseX: Int,
         mouseY: Int,
@@ -71,10 +71,6 @@ class ItemListWidget(
         }
 
         return super.mouseClicked(mouseX, mouseY, button)
-    }
-
-    override fun drawBox(context: DrawContext?, x: Int, y: Int, width: Int, height: Int) {
-        // 背景を透明にするため、何もしない
     }
 
     override fun appendClickableNarrations(builder: NarrationMessageBuilder?) {

@@ -2,9 +2,9 @@ package jp.takejohn.iomctokyostoragekit.client.highlight
 
 import com.mojang.blaze3d.systems.RenderSystem
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext
+import net.minecraft.client.gl.ShaderProgramKeys
 import net.minecraft.client.render.BufferBuilder
 import net.minecraft.client.render.BufferRenderer
-import net.minecraft.client.render.GameRenderer
 import net.minecraft.client.render.Tessellator
 import net.minecraft.client.render.VertexFormat
 import net.minecraft.client.render.VertexFormats
@@ -46,7 +46,7 @@ object HighlightMarkerClient {
                 RenderSystem.enableBlend()
                 // Zバッファを無効にして最前面に描画
                 RenderSystem.disableDepthTest()
-                RenderSystem.setShader(GameRenderer::getPositionTexProgram)
+                RenderSystem.setShader(ShaderProgramKeys.POSITION_TEX)
                 RenderSystem.setShaderTexture(0, markerTexture)
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
 
