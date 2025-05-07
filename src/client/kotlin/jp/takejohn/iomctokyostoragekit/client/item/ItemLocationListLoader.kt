@@ -1,5 +1,6 @@
 package jp.takejohn.iomctokyostoragekit.client.item
 
+import jp.takejohn.iomctokyostoragekit.client.IomcTokyoStorageKitClient
 import jp.takejohn.iomctokyostoragekit.client.serialize.ItemTable
 import kotlinx.serialization.json.Json
 import org.apache.http.client.HttpClient
@@ -18,9 +19,13 @@ object ItemLocationListLoader {
         val future = CompletableFuture<ItemLocationList>()
         client.execute(request, { response ->
             val body: String = EntityUtils.toString(response.entity, StandardCharsets.UTF_8)
-            val itemTable: ItemTable = Json.decodeFromString<ItemTable>(body)
-            val itemLocationList: ItemLocationList = ItemLocationList.from(itemTable)
-            future.complete(itemLocationList)
+            try {
+                val itemTable: ItemTable = Json.decodeFromString<ItemTable>(body)
+                val itemLocationList: ItemLocationList = ItemLocationList.from(itemTable)
+                future.complete(itemLocationList)
+            } catch (e: Exception) {
+                IomcTokyoStorageKitClient.LOGGER.error("Failed to deserialize item data", e)
+            }
         })
         return future
     }
