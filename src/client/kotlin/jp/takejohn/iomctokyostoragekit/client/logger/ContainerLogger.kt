@@ -6,6 +6,7 @@ import com.mojang.serialization.DataResult
 import com.mojang.serialization.JsonOps
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.block.BlockState
+import net.minecraft.client.MinecraftClient
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -63,5 +64,11 @@ class ContainerLogger {
         }
     }
 
-    fun serialize(): DataResult<JsonElement> = recordsCodec.encodeStart(JsonOps.INSTANCE, records)
+    fun serialize(): DataResult<JsonElement> {
+        return MinecraftClient.getInstance().world?.let {
+            recordsCodec.encodeStart(it.registryManager.getOps(JsonOps.INSTANCE), records)
+        } ?: DataResult.error {
+            "ClientWorld is null"
+        }
+    }
 }

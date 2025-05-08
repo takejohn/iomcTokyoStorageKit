@@ -18,7 +18,7 @@ import java.util.List;
 abstract class GenericContainerScreenHandlerMixin {
     @Inject(method = "onClosed", at = @At("HEAD"))
     private void onClosed(PlayerEntity player, CallbackInfo callbackInfo) {
-        if (!ContainerLoggerManager.INSTANCE.isEnabled()) {
+        if (!player.getWorld().isClient || !ContainerLoggerManager.INSTANCE.isEnabled()) {
             return;
         }
 
