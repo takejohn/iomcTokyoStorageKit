@@ -8,9 +8,11 @@ import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.gui.widget.ScrollableWidget
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
+import net.minecraft.util.Identifier
 
 private const val MARGIN = 5
 private const val ITEM_SIZE = 18
+private const val UNKNOWN_ITEM_ICON_SIZE = 16
 
 class ItemListWidget(
     private val itemLocationList: ItemLocationList,
@@ -21,6 +23,13 @@ class ItemListWidget(
     message: Text,
 ) : ScrollableWidget(x, y, width, height, message) {
     inner class TooltipWithMousePosition(val tooltip: List<Text>, val mouseX: Int, val mouseY: Int)
+
+    companion object {
+        private val unknownItemTexture: Identifier = Identifier.of(
+            "iomctokyostoragekit",
+            "textures/gui/unknown_item.png"
+        )
+    }
 
     var hoveredTooltip: TooltipWithMousePosition? = null
 
@@ -43,8 +52,22 @@ class ItemListWidget(
     ) {
         for ((i, itemLocation) in itemLocationList.withIndex()) {
             val (itemX, itemY) = getPositionByIndex(i)
-            val itemStack = ItemStack(itemLocation.item)
-            context.drawItem(itemStack, itemX, itemY)
+            if (itemLocation.isUnknownItem) {
+                context.drawTexture(
+                    unknownItemTexture,
+                    itemX,
+                    itemY,
+                    0f,
+                    0f,
+                    UNKNOWN_ITEM_ICON_SIZE,
+                    UNKNOWN_ITEM_ICON_SIZE,
+                    UNKNOWN_ITEM_ICON_SIZE,
+                    UNKNOWN_ITEM_ICON_SIZE
+                )
+            } else {
+                val itemStack = ItemStack(itemLocation.item)
+                context.drawItem(itemStack, itemX, itemY)
+            }
 
             // ホバーしている場合、ツールチップを描画
             if (mouseX in itemX until (itemX + ITEM_SIZE) && mouseY in itemY until (itemY + ITEM_SIZE)) {
@@ -53,7 +76,7 @@ class ItemListWidget(
                     "gui.iomctokyostoragekit.category",
                     itemLocation.category
                 )
-                val tooltip = listOf(itemStack.name, locationText, categoryText)
+                val tooltip = listOf(itemLocation.name, locationText, categoryText)
                 hoveredTooltip = TooltipWithMousePosition(tooltip, mouseX, mouseY)
             }
         }
