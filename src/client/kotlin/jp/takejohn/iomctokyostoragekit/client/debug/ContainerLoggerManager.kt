@@ -4,7 +4,6 @@ import com.google.gson.JsonElement
 import com.mojang.serialization.DataResult
 import jp.takejohn.iomctokyostoragekit.client.IomcTokyoStorageKitClient
 import jp.takejohn.iomctokyostoragekit.client.io.IOUtils
-import net.minecraft.client.MinecraftClient
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Style
 import net.minecraft.text.Text
@@ -45,7 +44,7 @@ object ContainerLoggerManager {
             }
         }, this::onSerializationError)
         this.logger = null
-        MinecraftClient.getInstance().player?.sendMessage(
+        IomcTokyoStorageKitClient.sendMessage(
             Text.translatable("debug.iomctokyostoragekit.logging.stop")
         )
     }
