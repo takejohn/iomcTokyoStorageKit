@@ -32,7 +32,7 @@ class IomcTokyoStorageKitClient : ClientModInitializer {
         fun sendMessage(message: Text) {
             val client = MinecraftClient.getInstance()
             client.execute {
-                client.player?.sendMessage(message)
+                client.player?.sendMessage(message, false)
             }
         }
     }
