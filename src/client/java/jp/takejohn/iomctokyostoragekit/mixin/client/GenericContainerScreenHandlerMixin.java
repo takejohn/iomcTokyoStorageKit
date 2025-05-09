@@ -1,6 +1,6 @@
 package jp.takejohn.iomctokyostoragekit.mixin.client;
 
-import jp.takejohn.iomctokyostoragekit.client.logger.ContainerLoggerManager;
+import jp.takejohn.iomctokyostoragekit.client.debug.ContainerLoggerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
