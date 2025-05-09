@@ -3,6 +3,7 @@ package jp.takejohn.iomctokyostoragekit.client.logger
 import com.google.gson.JsonElement
 import com.mojang.serialization.DataResult
 import jp.takejohn.iomctokyostoragekit.client.IomcTokyoStorageKitClient
+import jp.takejohn.iomctokyostoragekit.client.debug.ContainerLogger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.launch
