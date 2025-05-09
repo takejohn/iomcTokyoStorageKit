@@ -1,4 +1,4 @@
-package jp.takejohn.iomctokyostoragekit.client.logger
+package jp.takejohn.iomctokyostoragekit.client.debug
 
 import com.google.gson.JsonElement
 import com.mojang.serialization.Codec

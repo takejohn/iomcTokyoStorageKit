@@ -1,11 +1,19 @@
 {
   "category.iomctokyostoragekit.key_bindings": "iomcTokyoStorageKit",
+  "debug.iomctokyostoragekit.category_map.end": "[iomcTokyoStorageKit] ジャンルマップの作成を停止しました",
+  "debug.iomctokyostoragekit.category_map.position_not_set": "[iomcTokyoStorageKit] 地点が設定されていません",
+  "debug.iomctokyostoragekit.category_map.set_end": "[iomcTokyoStorageKit] 終了地点を (%1$s) に設定しました",
+  "debug.iomctokyostoragekit.category_map.set_start": "[iomcTokyoStorageKit] 開始地点を (%1$s) に設定しました",
+  "debug.iomctokyostoragekit.category_map.start": "[iomcTokyoStorageKit] ジャンルマップの作成を開始しました",
   "debug.iomctokyostoragekit.logging.save_failed": "[iomcTokyoStorageKit] コンテナの記録の保存に失敗しました",
   "debug.iomctokyostoragekit.logging.start": "[iomcTokyoStorageKit] コンテナの記録を開始しました",
   "debug.iomctokyostoragekit.logging.stop": "[iomcTokyoStorageKit] コンテナの記録を停止しました",
   "gui.iomctokyostoragekit.item_search": "iomc東京倉庫 アイテム検索",
   "gui.iomctokyostoragekit.search": "検索",
   "gui.iomctokyostoragekit.category": "ジャンル: %1$s",
+  "gui.iomctokyostoragekit.configure_category": "ジャンルの設定",
+  "gui.iomctokyostoragekit.confirm": "決定",
   "key.iomctokyostoragekit.open_search_screen": "検索画面を開く",
-  "key.iomctokyostoragekit.toggle_logging": "コンテナの記録を切り替え"
+  "key.iomctokyostoragekit.toggle_category_map": "(デバッグ用) ジャンルマップの作成を切り替え",
+  "key.iomctokyostoragekit.toggle_logging": "(デバッグ用) コンテナの記録を切り替え"
 }

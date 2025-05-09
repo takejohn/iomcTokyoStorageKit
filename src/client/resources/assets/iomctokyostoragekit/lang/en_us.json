@@ -1,11 +1,19 @@
 {
   "category.iomctokyostoragekit.key_bindings": "iomcTokyoStorageKit",
   "debug.iomctokyostoragekit.logging.save_failed": "[iomcTokyoStorageKit] Container logging failed to save",
+  "debug.iomctokyostoragekit.category_map.end": "[iomcTokyoStorageKit] Category map creation stopped",
+  "debug.iomctokyostoragekit.category_map.position_not_set": "[iomcTokyoStorageKit] Positions are not set",
+  "debug.iomctokyostoragekit.category_map.set_end": "[iomcTokyoStorageKit] Set end position to (%1$s)",
+  "debug.iomctokyostoragekit.category_map.set_start": "[iomcTokyoStorageKit] Set start position to (%1$s)",
+  "debug.iomctokyostoragekit.category_map.start": "[iomcTokyoStorageKit] Category map creation started",
   "debug.iomctokyostoragekit.logging.start": "[iomcTokyoStorageKit] Container logging started",
   "debug.iomctokyostoragekit.logging.stop": "[iomcTokyoStorageKit] Container logging stopped",
   "gui.iomctokyostoragekit.item_search": "iomc Tokyo Storage Item Search",
   "gui.iomctokyostoragekit.search": "Search",
   "gui.iomctokyostoragekit.category": "Category: %1$s",
+  "gui.iomctokyostoragekit.configure_category": "Configure Category",
+  "gui.iomctokyostoragekit.confirm": "Confirm",
   "key.iomctokyostoragekit.open_search_screen": "Open Search Screen",
-  "key.iomctokyostoragekit.toggle_logging": "Toggle Container Logging"
+  "key.iomctokyostoragekit.toggle_category_map": "(For Debug) Toggle Category Map Creation",
+  "key.iomctokyostoragekit.toggle_logging": "(For Debug) Toggle Container Logging"
 }
