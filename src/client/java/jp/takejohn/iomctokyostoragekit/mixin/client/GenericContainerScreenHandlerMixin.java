@@ -2,16 +2,16 @@ package jp.takejohn.iomctokyostoragekit.mixin.client;
 
 import jp.takejohn.iomctokyostoragekit.client.logger.ContainerLoggerManager;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.GenericContainerScreenHandler;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.screen.slot.Slot;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(GenericContainerScreenHandler.class)
@@ -22,7 +22,7 @@ abstract class GenericContainerScreenHandlerMixin {
             return;
         }
 
-        final ScreenHandler handler = (ScreenHandler)(Object)this;
+        final GenericContainerScreenHandler handler = (GenericContainerScreenHandler)(Object)this;
         final ScreenHandlerType<?> type = handler.getType();
 
         // 9x3 または 9x6 のインベントリを持つブロックに限定
@@ -30,10 +30,15 @@ abstract class GenericContainerScreenHandlerMixin {
             return;
         }
 
-        final List<ItemStack> items = handler.slots.stream()
-                .map(Slot::getStack)
-                .filter(itemStack -> !itemStack.isEmpty())
-                .toList();
+        final Inventory inventory = handler.getInventory();
+        final List<ItemStack> items = new ArrayList<>(inventory.size());
+        final int inventorySize = inventory.size();
+        for (int i = 0 ; i < inventorySize ; i++) {
+            ItemStack stack = inventory.getStack(i);
+            if (!stack.isEmpty()) {
+                items.add(stack);
+            }
+        }
         ContainerLoggerManager.INSTANCE.log(items);
     }
 }
